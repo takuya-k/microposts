@@ -1,0 +1,39 @@
+<h1>Edit</h1>
+
+<!-- プロフィールの更新入力 -->
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <%= form_for(@user) do |f| %>
+      <!-- 変更後のメールアドレスの入力 -->
+      <%= f.label :email, "Email"%><br>
+      <%= f.text_field :email, class: "form-control", placeholder: "メールアドレスを入力してください。" %>
+    
+      <!-- 自己紹介文の記載self‐introduction -->
+      <%= f.label :profile, "Self-introduction" %>
+      <%= f.text_area :profile, class: "form-control", placeholder: "自己紹介文を入力してください(160文字以内)。" %>
+
+      <!-- 地域を入力 -->
+      <%= f.label :area, "Area" %>
+      <%= f.text_field :area, class: "form-control", placeholder: "地域を入力してください。" %>
+      
+      <!-- 生年月日を入力 -->
+      <%= f.label :birthday, "Birthday" %>
+      <%= f.text_field :birthday, class: "form-control", placeholder: "生年月日を入力してください。例）2017年1月1日の場合：20170101" %>
+      
+      <!-- 更新ボタン -->
+      <%= f.submit "Update profile", class: "btn btn-large btn-primary" %>
+     <% end %>
+  </div>  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+

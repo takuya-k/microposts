@@ -1,4 +1,38 @@
+<!-- ユーザー名と画像を表示 -->
 <h1>
   <%= gravatar_for @user %>
   <%= @user.name %>
 </h1>
+
+<!-- プロフィールの更新入力 -->
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <!-- 自己紹介文の表示 -->
+    <div class="panel panel-primary">
+      <div class="panel-heading">自己紹介</div>
+      <div class="panel-body"><%= simple_format(@user.profile)%></div>
+    </div>
+    
+    <!-- 地域の表示 -->
+    <div class="panel panel-primary">
+      <div class="panel-heading">地域</div>
+      <div class="panel-body"><%= @user.area %></div>
+    </div>    
+    
+    <!-- 地域の表示 -->
+    <div class="panel panel-primary">
+      <div class="panel-heading">生年月日</div>
+      <div class="panel-body">
+        <%= @user.birthday.to_s[0, 4] %>年
+        <%= @user.birthday.to_s[4, 2] %>月
+        <%= @user.birthday.to_s[6, 2] %>月
+      </div>
+    </div>    
+    
+    <!-- 地域の表示 -->
+    <div class="panel panel-primary">
+      <div class="panel-heading">最終更新日</div>
+      <div class="panel-body"><%= @user.updated_at %></div>
+    </div>    
+  </div>  
+</div>
