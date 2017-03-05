@@ -1,38 +1,44 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
-body{
+/*-----------*/
+/* universal */
+body {
   padding-top: 60px;
 }
 
-section{
+section {
   overflow: auto;
 }
 
-textarea{
+textarea {
   resize: vertical;
 }
 
-.center{
+.center {
   text-align: center;
 }
 
-.center h1{
+.center h1 {
   margin-bottom: 10px;
 }
+/*-----------*/
 
-h1, h2, h3, h4, h5, h6{
+
+/*------------*/
+/* typography */
+h1, h2, h3, h4, h5, h6 {
   line-height: 1;
 }
 
-h1{
+h1 {
   font-size: 3em;
   letter-spacing: -2px;
   margin-bottom: 30px;
   text-align: center;
 }
 
-h2{
+h2 {
   font-size: 1.2em;
   letter-spacing: -1px;
   margin-bottom: 30px;
@@ -41,12 +47,17 @@ h2{
   color: #777;
 }
 
-p{
+p {
   font-size: 1.1em;
   line-height: 1.7em;
 }
+/*------------*/
 
-#logo{
+
+/*--------*/
+/* header */
+
+#logo {
   float: left;
   margin-right: 10px;
   font-size: 1.7em;
@@ -57,10 +68,15 @@ p{
   font-weight: bold;
 }
 
-#logo:hover{
+#logo:hover {
   color: #fff;
   text-decoration: none;
 }
+/*--------*/
+
+
+/*-------------------------*/
+/* mixins, variables, etc. */
 
 $gray-medium-light: #eaeaea;
 
@@ -69,7 +85,10 @@ $gray-medium-light: #eaeaea;
   -webkit-box-sizing: border-box;
   box-sizing:         border-box;
 }
+/*-------------------------*/
 
+
+/*-------*/
 /* forms */
 
 input, textarea, select, .uneditable-input {
@@ -97,3 +116,67 @@ input {
     color: $state-danger-text;
   }
 }
+/*-------*/
+
+
+/*---------*/
+/* sidebar */
+aside {
+  section.user_info {
+    margin-top: 20px;
+    border: solid 1px black; 
+  }
+  section {
+    padding: 10px 0;
+    margin-top: 20px;
+    &:first-child {
+      border: 0;
+      padding-top: 0;
+    }
+    span {
+      display: block;
+      margin-bottom: 3px;
+      line-height: 1;
+    }
+    h1 {
+      font-size: 1.4em;
+      text-align: left;
+      letter-spacing: -1px;
+      margin-bottom: 3px;
+      margin-top: 0px;
+    }
+  }
+}
+
+.user_info .gravater{
+  float: left;
+  margin-right: 10px;
+  margin-top: 5px;
+}
+/*---------*/
+
+
+/*------------*/
+/* microposts */
+.microposts {
+  list-style: none;
+  padding: 0;
+}
+
+.microposts li{
+  border-top: 1px solid #e8e8e8;
+  min-height: 90px;
+  width: 100%;
+}
+
+.microposts li .gravater{
+  display: block;
+  float: left;
+  margin-right: 10px;
+  margin-top: 5px;
+}
+
+.micropost_content{
+  overflow: hidden;
+}
+/*------------*/

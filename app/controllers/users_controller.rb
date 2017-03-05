@@ -17,6 +17,7 @@ class UsersController < ApplicationController
   end
   
   def show
+    @microposts = @user.microposts.order(created_at: :desc)
   end
   
   def edit
@@ -26,10 +27,15 @@ class UsersController < ApplicationController
   end
   
   def update
-    if @user.update(user_params)
-      redirect_to user_path(@user[:id])
+    if @user.id != current_user.id
+      redirect_to root_path
     else
-      render 'edit'
+      if @user.update(user_params)
+        flash[:success] = "Profile changed"
+        redirect_to user_path(@user[:id])
+      else
+        render 'edit'
+      end
     end 
   end
 
