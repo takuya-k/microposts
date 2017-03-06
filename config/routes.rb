@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   #Topページへのルート
-  root to: 'stasic_pages#home'
+  root to: 'static_pages#home'
   
   #新規登録へのルート
   get 'signup', to: 'users#new'
@@ -12,4 +12,5 @@ Rails.application.routes.draw do
   
   resources :users
   resources :microposts
+  resources :relationships, only: [:create, :destroy]
 end

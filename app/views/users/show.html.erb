@@ -27,7 +27,7 @@
         <div class="panel-body">
           <%= @user.birthday.to_s[0, 4] %>年
           <%= @user.birthday.to_s[4, 2] %>月
-          <%= @user.birthday.to_s[6, 2] %>月
+          <%= @user.birthday.to_s[6, 2] %>日
         </div>
       </div>    
       
@@ -40,6 +40,7 @@
   </aside>
 
   <div class="col-md-8">
+    <%= render 'follow_form' if logged_in? %>
     <% if @user.microposts.any? %>
       <h3>Microposts(<%= @user.microposts.count %>)</h3>
       <ol class="microposts">

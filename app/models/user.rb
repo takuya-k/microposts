@@ -24,4 +24,35 @@ class User < ActiveRecord::Base
   
   #一人のユーザーにつき複数の投稿を保持できるようにする
   has_many :microposts
+  
+  #一人のユーザーがフォローしているrelationshipの集まり
+  has_many :following_relationships, class_name: "Relationship",
+              foreign_key: "follower_id", dependent: :destroy
+              
+  
+  #一人のユーザーがフォローしている人の集まり
+  has_many :following_users, through: :following_relationships, source: :followed
+  
+  #一人のユーザーをフォローしているrelationshipの集まり
+  has_many :follower_relationships, class_name: "Relationship",
+              foreign_key: "followed_id", dependent: :destroy
+  
+  #一人のユーザーをフォローしている人の集まり
+  has_many :follower_users, through: :follower_relationships, source: :follower
+  
+  #他のユーザーをフォローする
+  def follow(other_user)
+    following_relationships.find_or_create_by(followed_id: other_user.id)
+  end
+  
+  #フォローしているユーザーをアンフォローする
+  def unfollow(other_user)
+    following_relationship = following_relationships.find_by(followed_id: other_user.id)
+    following_relationship.destroy if following_relationship
+  end
+  
+  #あるユーザーをフォローしているかどうか
+  def following?(other_user)
+    following_users.include?(other_user)
+  end
 end
