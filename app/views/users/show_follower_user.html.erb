@@ -50,10 +50,18 @@
 
   <div class="col-md-8">
     <%= render 'follow_form' if logged_in? %>
-    <% if @user.microposts.any? %>
-      <h3>Microposts(<%= @user.microposts.count %>)</h3>
-      <ol class="microposts">
-        <%= render @microposts %>  
+    <% if @user.follower_users.any? %>
+      <h3>Follows(<%= @user.follower_users.count %>)</h3>
+      <ol class="following_follower">
+        <div class="row">
+          <% @follower_users.each do |follower_user| %>
+            <div class="col-md-4">
+              <%= render partial: 'relationships/follower_users', locals: {follower_user: follower_user} %>
+              <br>
+              <%= follower_user.profile %>
+            </div>
+          <% end %>
+        </div>
       </ol>
     <% end %>
   </div>

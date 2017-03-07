@@ -10,6 +10,10 @@ Rails.application.routes.draw do
   post   'login',  to: 'sessions#create'
   delete 'logout', to: 'sessions#destroy'
   
+  #フォロー一覧、フォロワー一覧のルート
+  get    'show_following_user/:id', to: 'users#show_following_user', as: 'show_following_user'
+  get    'show_follower_user/:id',  to: 'users#show_follower_user', as: 'show_follower_user'
+  
   resources :users
   resources :microposts
   resources :relationships, only: [:create, :destroy]

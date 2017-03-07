@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update]
+  before_action :set_user,
+    only: [:show, :edit, :update, :show_following_user, :show_follower_user]
   
   def new
     @user = User.new
@@ -38,6 +39,15 @@ class UsersController < ApplicationController
       end
     end 
   end
+  
+  def show_following_user
+    @following_users = @user.following_users.order(created_at: :desc)
+  end
+
+  def show_follower_user
+    @follower_users = @user.follower_users.order(created_at: :desc)
+  end
+
 
   #-----------------------
   #ここからprivateメソッド
