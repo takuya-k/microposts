@@ -1,0 +1,5 @@
+<% if current_user.favoliting?(micropost) %>
+  <%= render 'users/unfollow_favorite', micropost: micropost %>
+<% else %>
+  <%= render 'users/follow_favorite', micropost: micropost %>
+<% end %>

@@ -14,7 +14,18 @@ Rails.application.routes.draw do
   get    'show_following_user/:id', to: 'users#show_following_user', as: 'show_following_user'
   get    'show_follower_user/:id',  to: 'users#show_follower_user', as: 'show_follower_user'
   
+  #お気に入り一覧
+  get    'show_favorite/:id', to: 'users#show_favorite', as: 'show_favorite'
+  
+  #お気に入りの登録
+  post   'favorite/:id', to: 'favorites#create', as: 'favorites'
+
   resources :users
-  resources :microposts
+  resources :microposts do
+    member do
+      get 'retweet'
+     end
+  end
   resources :relationships, only: [:create, :destroy]
+  resources :favorites, only: [:destroy]
 end

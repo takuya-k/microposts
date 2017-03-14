@@ -15,6 +15,9 @@
       <span>
         <%= link_to pluralize(@user.follower_users.count, "follower"), show_follower_user_path(@user) %>
       </span>
+      <span>
+        <%= link_to "favorite", show_favorite_path(@user) %>
+      </span>
     </section>
 
     <section class="profile">
@@ -51,10 +54,12 @@
   <div class="col-md-8">
     <%= render 'follow_form' if logged_in? %>
     <% if @user.microposts.any? %>
+      <%= page_entries_info @microposts %>
       <h3>Microposts(<%= @user.microposts.count %>)</h3>
       <ol class="microposts">
         <%= render @microposts %>  
       </ol>
+      <%= paginate @microposts %>
     <% end %>
   </div>
 </div>

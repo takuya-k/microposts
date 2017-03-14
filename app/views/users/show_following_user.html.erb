@@ -15,6 +15,9 @@
       <span>
         <%= link_to pluralize(@user.follower_users.count, "follower"), show_follower_user_path(@user) %>
       </span>
+      <span>
+        <%= link_to "favorite", show_favorite_path(@user) %>
+      </span>
     </section>
 
     <section class="profile">
@@ -51,6 +54,7 @@
   <div class="col-md-8">
     <%= render 'follow_form' if logged_in? %>
     <% if @user.following_users.any? %>
+      <%= page_entries_info @following_users %>
       <h3>Follows(<%= @user.following_users.count %>)</h3>
       <ol class="following_follower">
         <div class="row">
@@ -63,6 +67,7 @@
           <% end %>
         </div>
       </ol>
+      <%= paginate @following_users %>
     <% end %>
   </div>
 </div>

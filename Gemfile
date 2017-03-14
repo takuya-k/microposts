@@ -31,6 +31,8 @@ gem 'bcrypt', '~> 3.1.7'
 # gem 'capistrano-rails', group: :development
 # デバッグ用の支援ツール
 gem 'pry-byebug', group: :development
+# kaminari(ページネーションを作成するGem)
+gem 'kaminari'
 
 
 

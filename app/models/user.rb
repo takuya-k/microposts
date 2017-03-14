@@ -40,6 +40,13 @@ class User < ActiveRecord::Base
   #一人のユーザーをフォローしている人の集まり
   has_many :follower_users, through: :follower_relationships, source: :follower
   
+  #
+  has_many :favorites, foreign_key: "user_id", dependent: :destroy
+  
+  #
+  has_many :favorites_microposts, class_name: "Micropost", through: :favorites
+                
+ 
   #他のユーザーをフォローする
   def follow(other_user)
     following_relationships.find_or_create_by(followed_id: other_user.id)
@@ -56,6 +63,22 @@ class User < ActiveRecord::Base
     following_users.include?(other_user)
   end
   
+  #投稿をお気に入りにする
+  def favolite(micropost)
+    favorites.find_or_create_by(micropost_id: micropost)
+  end
+
+  #投稿をお気に入りを取り消す
+  def unfavolite(micropost)
+    favorite = favorites.find_by(micropost_id: micropost)
+    favorite.destroy if favorite
+  end
+  
+  #投稿をお気に入りしているかどうか
+  def favoliting?(micropost)
+    Favorite.find_by(micropost_id: micropost)
+  end
+
   def feed_items
     Micropost.where(user_id: following_user_ids + [self.id])
   end

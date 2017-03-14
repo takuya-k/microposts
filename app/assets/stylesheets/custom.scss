@@ -167,6 +167,7 @@ aside {
   border-top: 1px solid #e8e8e8;
   min-height: 90px;
   width: 100%;
+  margin-bottom: 20px;
 }
 
 .microposts li .gravater{
@@ -179,6 +180,11 @@ aside {
 .micropost_content{
   overflow: hidden;
 }
+
+.micropost_user_name{
+  margin-right: 20px;
+}
+
 /*------------*/
 
 

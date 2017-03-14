@@ -11,14 +11,13 @@ class UsersController < ApplicationController
     if @user.save
       flash[:success] = "Welcome to the Sample App!"
       redirect_to user_path(@user[:id])
-
     else
       render 'new'
     end
   end
   
   def show
-    @microposts = @user.microposts.order(created_at: :desc)
+    @microposts = @user.microposts.order(created_at: :desc).page(params[:page]).per(10)
   end
   
   def edit
@@ -41,14 +40,17 @@ class UsersController < ApplicationController
   end
   
   def show_following_user
-    @following_users = @user.following_users.order(created_at: :desc)
+    @following_users = @user.following_users.order(created_at: :desc).page(params[:page]).per(15)
   end
 
   def show_follower_user
-    @follower_users = @user.follower_users.order(created_at: :desc)
+    @follower_users = @user.follower_users.order(created_at: :desc).page(params[:page]).per(15)
   end
 
-
+  def show_favoriting_microposts
+    @favoriting_microposts = @user.favoriting_microposts.order(created_at: :desc)..page(params[:page]).per(10)
+  end
+    
   #-----------------------
   #ここからprivateメソッド
   #-----------------------

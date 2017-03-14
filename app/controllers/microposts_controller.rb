@@ -7,8 +7,8 @@ class MicropostsController < ApplicationController
       flash[:success] = "Micropost created"
       redirect_to root_url
     else
-      @feed_items = current_user.feed_items.includes(:user).order(created_at: :desc)
-      render 'static_page/home'
+      @feed_items = current_user.feed_items.includes(:user).order(created_at: :desc).page(params[:page]).per(10)
+      render 'static_pages/home'
     end
   end
   
@@ -18,6 +18,19 @@ class MicropostsController < ApplicationController
     @micropost.destroy
     flash[:success] = "Micropost deleted"
     redirect_to request.referrer || root_url
+  end
+  
+  def retweet
+    origin_tweet = Micropost.find(params[:id])
+    origin_user  = User.find(Micropost.find(params[:id]).user_id)
+    @micropost = current_user.microposts.build(origin_id: origin_tweet.id,
+                    origin_user_id: origin_user.id, origin_name: origin_user.name, content: origin_tweet.content)
+    if @micropost.save
+      flash[:success] = "Retweet"
+      redirect_to root_url
+    else
+      render 'static_pages/home'
+    end
   end
   
   
