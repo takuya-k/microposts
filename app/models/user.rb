@@ -44,7 +44,7 @@ class User < ActiveRecord::Base
   has_many :favorites, foreign_key: "user_id", dependent: :destroy
   
   #
-  has_many :favorites_microposts, class_name: "Micropost", through: :favorites
+  has_many :favorites_microposts, class_name: "Micropost", through: :favorites, source: :micropost
                 
  
   #他のユーザーをフォローする

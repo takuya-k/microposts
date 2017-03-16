@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user,
-    only: [:show, :edit, :update, :show_following_user, :show_follower_user]
+    only: [:show, :edit, :update, :show_following_user, :show_follower_user, :show_favorite]
   
   def new
     @user = User.new
@@ -9,6 +9,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
+      session[:user_id] = @user.id
       flash[:success] = "Welcome to the Sample App!"
       redirect_to user_path(@user[:id])
     else
@@ -47,8 +48,8 @@ class UsersController < ApplicationController
     @follower_users = @user.follower_users.order(created_at: :desc).page(params[:page]).per(15)
   end
 
-  def show_favoriting_microposts
-    @favoriting_microposts = @user.favoriting_microposts.order(created_at: :desc)..page(params[:page]).per(10)
+  def show_favorite
+    @favoriting_microposts = @user.favorites_microposts.order(created_at: :desc).page(params[:page]).per(10)
   end
     
   #-----------------------

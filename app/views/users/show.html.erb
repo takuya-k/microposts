@@ -16,7 +16,7 @@
         <%= link_to pluralize(@user.follower_users.count, "follower"), show_follower_user_path(@user) %>
       </span>
       <span>
-        <%= link_to "favorite", show_favorite_path(@user) %>
+        <%= link_to pluralize(@user.favorites.count, "favorite"), show_favorite_path(@user) %>
       </span>
     </section>
 

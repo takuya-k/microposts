@@ -1,1 +1,70 @@
-<h1>aaaaa</h1>
+<!-- ユーザー名と画像を表示 -->
+<div class="row">
+  <aside class="col-md-4">
+    <section class="user_info">
+      <%= gravatar_for(@user) %>
+      <h1>
+        <%= @user.name %>
+      </h1>
+      <span>
+        <%= link_to pluralize(@user.microposts.count, "micropost"), user_path(@user) %>
+      </span>
+      <span>
+        <%= link_to pluralize(@user.following_users.count, "follow"), show_following_user_path(@user) %>
+      </span>
+      <span>
+        <%= link_to pluralize(@user.follower_users.count, "follower"), show_follower_user_path(@user) %>
+      </span>
+      <span>
+        <%= link_to pluralize(@user.favorites.count, "favorite"), show_favorite_path(@user) %>
+      </span>
+    </section>
+
+    <section class="profile">
+      <!-- 自己紹介文の表示 -->
+      <div class="panel panel-primary">
+        <div class="panel-heading">自己紹介</div>
+        <div class="panel-body"><%= simple_format(@user.profile) %></div>
+      </div>
+      
+      <!-- 地域の表示 -->
+      <div class="panel panel-primary">
+        <div class="panel-heading">地域</div>
+        <div class="panel-body"><%= @user.area %></div>
+      </div>    
+      
+      <!-- 生年月日の表示 -->
+      <div class="panel panel-primary">
+        <div class="panel-heading">生年月日</div>
+        <div class="panel-body">
+          <%= @user.birthday.to_s[0, 4] %>年
+          <%= @user.birthday.to_s[4, 2] %>月
+          <%= @user.birthday.to_s[6, 2] %>日
+        </div>
+      </div>    
+      
+      <!-- 最終更新日の表示 -->
+      <div class="panel panel-primary">
+        <div class="panel-heading">最終更新日</div>
+        <div class="panel-body"><%= @user.updated_at %></div>
+      </div>
+    </section>
+  </aside>
+
+  <div class="col-md-8">
+    <%= render 'follow_form' if logged_in? %>
+    <% if @user.favorites_microposts.any? %>
+      <%= page_entries_info @favoriting_microposts %>
+      <h3>Favorites(<%= @favoriting_microposts.count %>)</h3>
+      <ol class="microposts">
+        <% @favoriting_microposts.each do |favoriting_micropost| %>
+          <%= render favoriting_micropost %> 
+        <% end %>
+      </ol>
+      <%= paginate @favoriting_microposts %>
+    <% end %>
+  </div>
+</div>
+
+        
+
